@@ -1,10 +1,10 @@
 import unittest
 
-from htmlnode import HTMLNode
-from leafnode import LeafNode
-from textnode import TextNode, TextType
+from src.htmlnode import HTMLNode
+from src.leafnode import LeafNode
+from src.textnode import TextNode, TextType
 
-from main import text_node_to_html_node
+from src.main import text_node_to_html_node
 
 class TestMain(unittest.TestCase):
     def test_text(self):
