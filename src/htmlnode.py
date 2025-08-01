@@ -20,8 +20,8 @@ class HTMLNode():
     def props_to_html(self):
         prop_str = ""
         if self.props:
-            for p in self.props:
-                prop_str += f' {p[0]}="{p[1]}"'
+            for key in self.props.keys():
+                prop_str += f' {key}="{self.props[key]}"'
         return prop_str
 
     def __eq__(self, other):

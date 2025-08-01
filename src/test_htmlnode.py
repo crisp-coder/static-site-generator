@@ -14,7 +14,13 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(node.__repr__(), html_str)
 
     def test_props_to_html(self):
-        pass
+        node = HTMLNode(
+            tag='p',
+            value='alaska',
+            children=[],
+            props={"href": "https://test.com", "name": "NodeOne"})
+
+        self.assertEqual(node.props_to_html(), ' href=\"https://test.com\" name=\"NodeOne\"')
 
 if __name__ == "__main__":
     unittest.main()

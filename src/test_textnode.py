@@ -9,8 +9,8 @@ class TestTextNode(unittest.TestCase):
         node2 = TextNode("This is a text node", TextType.BOLD)
         self.assertEqual(node, node2)
 
-        node3 = TextNode("This is a text node", TextType.PLAIN)
-        node4 = TextNode("This is a text node", TextType.PLAIN)
+        node3 = TextNode("This is a text node", TextType.TEXT)
+        node4 = TextNode("This is a text node", TextType.TEXT)
         self.assertEqual(node3, node4)
 
         node5 = TextNode("This is a text node", TextType.LINK, "https://github.com")
@@ -18,7 +18,7 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(node5, node6)
 
     def test_not_eq(self):
-        node = TextNode("Larger than life.", TextType.PLAIN)
+        node = TextNode("Larger than life.", TextType.TEXT)
         node2 = TextNode("Larger than life.", TextType.BOLD)
         self.assertFalse(node == node2)
 
@@ -32,8 +32,8 @@ class TestTextNode(unittest.TestCase):
         self.assertFalse(node4 == node6)
 
     def test_repr(self):
-        node = TextNode("This is a text node", TextType.PLAIN)
-        TextNode_STR = "TextNode(This is a text node, plain, None)"
+        node = TextNode("This is a text node", TextType.TEXT)
+        TextNode_STR = "TextNode(This is a text node, text, None)"
         self.assertEqual(node.__repr__(), TextNode_STR)
 
 if __name__ == "__main__":
