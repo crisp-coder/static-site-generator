@@ -1,5 +1,5 @@
-from src.htmlnode import HTMLNode
-from src.textnode import TextNode, TextType
+from htmlnode import HTMLNode
+from textnode import TextNode, TextType
 
 class LeafNode(HTMLNode):
     def __init__(self, tag=None, value=None, props=None):
