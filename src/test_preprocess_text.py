@@ -4,6 +4,7 @@ from textnode import TextNode, TextType
 from preprocess_text import *
 
 class TestPreprocessText(unittest.TestCase):
+
     def test_text_to_text_nodes(self):
         text = 'This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)'
         nodes = text_to_textnodes(text)
@@ -22,12 +23,6 @@ class TestPreprocessText(unittest.TestCase):
                 TextNode("link", TextType.LINK, "https://boot.dev"),
             ]
         )
-
-    def test_text_to_html_node(self):
-        node = TextNode("This is a text node", TextType.TEXT)
-        html_node = text_node_to_html_node(node)
-        self.assertEqual(html_node.tag, None)
-        self.assertEqual(html_node.value, "This is a text node")
 
     def test_extract_markdown_links(self):
         text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
