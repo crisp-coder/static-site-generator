@@ -3,6 +3,15 @@ import re
 from textnode import TextType, TextNode
 from leafnode import LeafNode
 
+def text_to_textnodes(text):
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    nodes = split_nodes_images(nodes)
+    nodes = split_nodes_links(nodes)
+    return nodes
+
 def extract_markdown_links(text):
     links = []
     matches = re.findall(r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)", text)
@@ -51,6 +60,9 @@ def split_nodes_links(old_nodes):
                 remaining_text = text_split[1]
             else:
                 break
+        # Append remaining text as a text node.
+        if remaining_text != "":
+            new_nodes.append(TextNode(remaining_text, TextType.TEXT))
 
     return new_nodes
 
@@ -88,6 +100,10 @@ def split_nodes_images(old_nodes):
                 remaining_text = text_split[1]
             else:
                 break
+
+        # Append remaining text as a text node.
+        if remaining_text != "":
+            new_nodes.append(TextNode(remaining_text, TextType.TEXT))
 
     return new_nodes
 

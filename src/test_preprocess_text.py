@@ -4,6 +4,25 @@ from textnode import TextNode, TextType
 from preprocess_text import *
 
 class TestPreprocessText(unittest.TestCase):
+    def test_text_to_text_nodes(self):
+        text = 'This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)'
+        nodes = text_to_textnodes(text)
+        self.assertEqual(
+            nodes,
+            [
+                TextNode("This is ", TextType.TEXT),
+                TextNode("text", TextType.BOLD),
+                TextNode(" with an ", TextType.TEXT),
+                TextNode("italic", TextType.ITALIC),
+                TextNode(" word and a ", TextType.TEXT),
+                TextNode("code block", TextType.CODE),
+                TextNode(" and an ", TextType.TEXT),
+                TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+                TextNode(" and a ", TextType.TEXT),
+                TextNode("link", TextType.LINK, "https://boot.dev"),
+            ]
+        )
+
     def test_text_to_html_node(self):
         node = TextNode("This is a text node", TextType.TEXT)
         html_node = text_node_to_html_node(node)
@@ -12,11 +31,23 @@ class TestPreprocessText(unittest.TestCase):
 
     def test_extract_markdown_links(self):
         text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
-        #print(extract_markdown_links(text))
+        self.assertEqual(
+            extract_markdown_links(text),
+            [
+                ("to boot dev", "https://www.boot.dev"),
+                ("to youtube", "https://www.youtube.com/@bootdotdev")
+            ]
+        )
 
     def test_extract_markdown_images(self):
         text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
-        #print(extract_markdown_images(text))
+        self.assertEqual(
+            extract_markdown_images(text),
+            [
+                ("rick roll", "https://i.imgur.com/aKaOqIh.gif"),
+                ("obi wan", "https://i.imgur.com/fJRm4Vk.jpeg")
+            ]
+        )
 
     def test_split_nodes_links(self):
         node = TextNode(
@@ -60,18 +91,13 @@ class TestPreprocessText(unittest.TestCase):
     def test_split_nodes_delimiter_many_nodes(self):
         self.maxDiff = None
         nodes = []
-        embedded_type = TextType.CODE
-        embedded_str = "`code block`"
-
+        embedded_str = ""
         for i in range(10):
             if i % 3 == 0:
-                embedded_type = TextType.CODE
                 embedded_str = "`code block`"
             elif i % 3 == 1:
-                embedded_type = TextType.BOLD
                 embedded_str = "**bold text**"
             elif i % 3 == 2:
-                embedded_type = TextType.ITALIC
                 embedded_str = "_italic text_"
 
 
