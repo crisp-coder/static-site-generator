@@ -19,11 +19,11 @@ def block_to_blocktype(block_text):
         return BlockType.UNORDERED_LIST
 
     for i in range(len(block_text)):
-        if block_text[i].isalpha():
+        if block_text[i].isnumeric():
             for j in range(i, len(block_text)):
                 if block_text[j] == '.':
                     return BlockType.ORDERED_LIST
-                elif not block_text[j].isalpha():
+                elif not block_text[j].isnumeric():
                     break
             break
 

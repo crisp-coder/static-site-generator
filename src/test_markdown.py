@@ -3,6 +3,23 @@ import unittest
 from markdown import *
 
 class TestMarkdown(unittest.TestCase):
+
+    def test_ordered_list(self):
+        md = """
+1. This is the first item.
+2. Second item.
+3. Third item
+has a second line.
+4. Fourth item has number 255 in it.
+"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ol><li>This is the first item.</li><li>Second item.</li><li>Third item has a second line.</li><li>Fourth item has number 255 in it.</li></ol></div>",
+        )
+
+
     def test_paragraphs(self):
         md = """
 This is **bolded** paragraph
