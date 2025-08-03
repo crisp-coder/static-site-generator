@@ -29,12 +29,4 @@ def block_to_blocktype(block_text):
 
     return BlockType.PARAGRAPH
 
-def markdown_to_blocks(markdown):
-    text_blocks = markdown.split("\n\n")
-    blocks = []
-    for item in text_blocks:
-        if item != "":
-            blocks.append(item.strip())
-
-    return blocks
 

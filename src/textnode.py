@@ -45,12 +45,12 @@ def text_node_to_html_node(text_node):
             output = LeafNode(
                 tag="a",
                 value=text_node.text,
-                props={"href": f'"{text_node.url}"'})
+                props={"href": f'{text_node.url}'})
         case TextType.IMAGE:
             output = LeafNode(
                 tag="img",
                 value=text_node.text,
-                props={"src":f'"{text_node.url}", "alt":"{text_node.text}"'})
+                props={"src":f'{text_node.url}', "alt":f'{text_node.text}'})
         case _:
             raise Exception("Unmatched text type.")
 
