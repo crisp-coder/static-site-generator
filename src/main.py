@@ -52,7 +52,7 @@ def main():
 
     # Copy the static assets to the public folder.
     if exists(abspath(static_dir)):
-        public_base_path = abspath(public_dir) + base_path
+        public_base_path = abspath(public_dir)
         copytree(static_dir, public_base_path, dirs_exist_ok=True)
 
 if __name__ == "__main__":

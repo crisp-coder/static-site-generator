@@ -36,7 +36,7 @@ def generate_page(from_path, template_path, dest_path, base_path, content_dir):
 
     # Create output file path.
     html_file = from_path[len(content_dir):-2] + 'html'
-    output_file_path = abspath(dest_path) + base_path + html_file
+    output_file_path = abspath(dest_path) + html_file
     print(f'output_file_path = {output_file_path}')
 
     # Create subdirectories based on output file path hierarchy.
